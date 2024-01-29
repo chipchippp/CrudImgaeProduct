@@ -1,0 +1,65 @@
+﻿@model CrudProduct.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Group" class="control-label"></label>
+                <input asp-for="Group" class="form-control" />
+                <span asp-validation-for="Group" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RollNumber" class="control-label"></label>
+                <input asp-for="RollNumber" class="form-control" />
+                <span asp-validation-for="RollNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" class="form-control" asp-items="ViewBag.Category"></select>
+            </div>
+            <div class="col-md-6">
+                <vc:image-uploader file-name="@nameof(Model.FrontImage)"> </vc:image-uploader>
+            </div>
+            <div class="col-md-6">
+                <vc:image-uploader file-name="@nameof(Model.BackImage)"> </vc:image-uploader>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    $(".custome-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custome-file-input").addClass("selected").html(fileName)
+    });
+</script>
